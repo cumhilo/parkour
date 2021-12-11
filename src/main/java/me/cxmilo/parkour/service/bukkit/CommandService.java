@@ -7,6 +7,7 @@ import me.cxmilo.parkour.service.Service;
 import me.yushust.message.util.Validate;
 import org.bukkit.command.CommandExecutor;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class CommandService
@@ -18,6 +19,9 @@ public class CommandService
         this.plugin = plugin;
     }
 
+    // I took the idea of replacements from the nmessage lib
+    // created by yusshu and turned it into a "setup-command" method
+    // credits: https://github.com/yusshu/nmessage
     private void registerCommands(Object... commands) {
         Validate.isTrue(commands.length % 2 == 0, "Commands array must be pair!");
 
@@ -33,12 +37,14 @@ public class CommandService
             Object commandExecutor = commands[i];
             Validate.isTrue(commandExecutor instanceof CommandExecutor, "The element at index " + i + " found in the command array must be a command executor!");
 
-            plugin.getCommand(name.toString()).setExecutor((CommandExecutor) commandExecutor);
+            Objects.requireNonNull(plugin.getCommand(name.toString()), "'" + name + "' command not found'")
+                    .setExecutor((CommandExecutor) commandExecutor);
         }
     }
 
     @Override
     public void start() {
+        // TODO: remove this, it is unnecessary, there are very few commands
         ParkourSetupCommand setupCommand = new ParkourSetupCommand(plugin);
 
         registerCommands(
