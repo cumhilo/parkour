@@ -29,14 +29,12 @@ public class ParkourSetupCommand
             String label,
             String[] args
     ) {
-        // command can only be executed by players!
         if (!(sender instanceof Player)) {
             return true;
         }
 
         Player player = (Player) sender;
 
-        // arguments are invalid
         if (args.length != 2) {
             return true;
         }
@@ -58,7 +56,6 @@ public class ParkourSetupCommand
 
         return true;
     }
-
 
     @Override
     public List<String> onTabComplete(

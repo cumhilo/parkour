@@ -35,21 +35,19 @@ public class ParkourCreateCommand
             String label,
             String[] args
     ) {
-        // command can only be executed by players!
         if (!(sender instanceof Player)) {
             return true;
         }
 
         Player player = (Player) sender;
 
-        // arguments are invalid
         if (args.length != 3 || !args[1].equalsIgnoreCase("create")) {
             return true;
         }
 
         String parkourDisplayName = args[2];
 
-        // name is invalid
+        // check if name is invalid using the method isValidName
         if (!isValidName(parkourDisplayName)) {
             plugin.getMessageHandler().sendReplacing(
                     player,
