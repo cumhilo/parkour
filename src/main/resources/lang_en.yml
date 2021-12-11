@@ -1,0 +1,5 @@
+parkour:
+  create: "&eYou have created the parkour &a%name%&e identified with &a%uuid%."
+  checkpoint:
+    teleport: "&eYou've fallen in parkour &a%parkour%&e, but you've been teleported to checkpoint number &a%checkpoint%&e again!"
+    get: "&eYou have reached the checkpoint number &a%num%&e in the parkour of &a%parkour%&e with a time of: &a%time%&e!"

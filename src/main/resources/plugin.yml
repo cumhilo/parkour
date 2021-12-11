@@ -1,0 +1,10 @@
+name: Parkour
+main: me.cxmilo.parkour.ParkourPlugin
+version: 1.0
+author: vCamilx
+commands:
+  parkour:
+    description: Parkour command
+  setup:
+    description: Parkour setup command
+    aliases: [ps, parkours]
