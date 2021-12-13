@@ -2,7 +2,7 @@ package me.cxmilo.parkour.game;
 
 import me.cxmilo.parkour.Parkour;
 import me.cxmilo.parkour.ParkourPlugin;
-import me.cxmilo.parkour.util.TImeUtil;
+import me.cxmilo.parkour.util.TimeUtil;
 import org.bukkit.entity.Player;
 
 public class ParkourGame {
@@ -14,13 +14,13 @@ public class ParkourGame {
 
     public ParkourGame(Parkour parkour) {
         this.parkour = parkour;
-        this.startTime = 0;
+        this.startTime = System.currentTimeMillis();
         this.endTime = 0;
         this.lastCheckPoint = 0;
     }
 
     public static ParkourGame getByPlayer(Player player) {
-        return ParkourPlugin.getInstance().getParkourGames().get(player.getUniqueId());
+        return ParkourPlugin.getInstance().getParkourGameRegistry().getParkourGames().get(player.getUniqueId());
     }
 
     public Parkour getParkour() {
@@ -44,7 +44,7 @@ public class ParkourGame {
     }
 
     public String getDisplayTime() {
-        return TImeUtil.durationToHumanTime(startTime - System.currentTimeMillis());
+        return TimeUtil.durationToHumanTime(System.currentTimeMillis() - startTime);
     }
 
     public int getLastCheckPoint() {
