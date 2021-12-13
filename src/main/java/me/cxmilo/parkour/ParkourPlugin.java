@@ -1,13 +1,12 @@
 package me.cxmilo.parkour;
 
-import me.cxmilo.parkour.game.ParkourGame;
 import me.cxmilo.parkour.message.MessageHandlerProvider;
+import me.cxmilo.parkour.service.ParkourService;
 import me.cxmilo.parkour.service.Service;
 import me.cxmilo.parkour.service.bukkit.CommandService;
+import me.cxmilo.parkour.service.bukkit.ListenerService;
 import me.yushust.message.MessageHandler;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.util.*;
 
 /**
  * Parkour plugin main class
@@ -15,9 +14,10 @@ import java.util.*;
 public class ParkourPlugin
         extends JavaPlugin {
 
-    private Map<UUID, ParkourGame> parkourGames;
-    private Set<Parkour> parkourSet;
+    private ParkourGameRegistry parkourGameRegistry;
+    private Service parkourService;
     private Service commandService;
+    private Service listenerService;
     private MessageHandler messageHandler;
 
     public static ParkourPlugin getInstance() {
@@ -26,27 +26,30 @@ public class ParkourPlugin
 
     @Override
     public void onEnable() {
+        getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
-        this.parkourGames = new HashMap<>();
-        this.parkourSet = new HashSet<>();
+        this.parkourGameRegistry = new ParkourGameRegistry();
+        this.parkourService = new ParkourService(this);
         this.commandService = new CommandService(this);
+        this.listenerService = new ListenerService(this);
         this.messageHandler = new MessageHandlerProvider(this).get();
 
+        parkourGameRegistry.initialize();
+        parkourService.start();
         commandService.start();
+        listenerService.start();
     }
 
     @Override
     public void onDisable() {
+        parkourService.stop();
         commandService.stop();
+        listenerService.stop();
     }
 
-    public Map<UUID, ParkourGame> getParkourGames() {
-        return parkourGames;
-    }
-
-    public Set<Parkour> getParkourSet() {
-        return parkourSet;
+    public ParkourGameRegistry getParkourGameRegistry() {
+        return parkourGameRegistry;
     }
 
     public MessageHandler getMessageHandler() {
