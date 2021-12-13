@@ -35,20 +35,26 @@ public class ParkourSetupCommand
 
         Player player = (Player) sender;
 
-        if (args.length != 2) {
+        if (args.length != 1) {
             return true;
         }
 
-        Parkour parkour = Parkour.findByName(args[1]);
+        Parkour parkour = Parkour.findByName(args[0]);
 
         // check if parkour could not be found
         if (parkour == null) {
-            throw new IllegalArgumentException(args[1] + " is not a valid parkour!");
+            plugin.getMessageHandler().sendReplacing(
+                    player,
+                    "parkour.setup.error",
+                    "%name%",
+                    args[0]
+            );
+            return true;
         }
 
-        SetupMode parkourSetup = new ParkourSetupMode(plugin, parkour);
+        SetupMode<Player> parkourSetup = new ParkourSetupMode(plugin, parkour);
 
-        if (parkourSetup.isSetupMode(player)) {
+        if (parkourSetup.hasSetupMode(player)) {
             parkourSetup.leave(player);
         } else {
             parkourSetup.enter(player);
@@ -64,14 +70,14 @@ public class ParkourSetupCommand
             String alias,
             String[] args
     ) {
-        if (args.length != 2) {
+        if (args.length != 1) {
             return null;
         }
 
         List<String> tabCompleter = new ArrayList<>();
 
-        for (Parkour parkour : plugin.getParkourSet()) {
-            if (args[1].toLowerCase().startsWith(parkour.getDisplayName().toLowerCase())) {
+        for (Parkour parkour : plugin.getParkourGameRegistry().getParkourSet()) {
+            if (args[0].toLowerCase().startsWith(parkour.getDisplayName().toLowerCase())) {
                 tabCompleter.add(parkour.getDisplayName());
             }
         }

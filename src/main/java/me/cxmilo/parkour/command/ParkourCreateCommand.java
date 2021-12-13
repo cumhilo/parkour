@@ -41,11 +41,11 @@ public class ParkourCreateCommand
 
         Player player = (Player) sender;
 
-        if (args.length != 3 || !args[1].equalsIgnoreCase("create")) {
+        if (args.length != 2 || !args[0].equalsIgnoreCase("create")) {
             return true;
         }
 
-        String parkourDisplayName = args[2];
+        String parkourDisplayName = args[1];
 
         // check if name is invalid using the method isValidName
         if (!isValidName(parkourDisplayName)) {
@@ -60,7 +60,7 @@ public class ParkourCreateCommand
 
         Parkour parkour = new Parkour(parkourDisplayName);
 
-        plugin.getParkourSet().add(parkour);
+        plugin.getParkourGameRegistry().getParkourSet().add(parkour);
         plugin.getMessageHandler().sendReplacing(
                 player,
                 "parkour.create",
