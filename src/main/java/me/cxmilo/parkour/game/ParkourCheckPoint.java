@@ -8,26 +8,37 @@ import org.bukkit.block.Block;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public class ParkourCheckPoint {
+public class ParkourCheckpoint {
 
     private final Parkour parkour;
     private Block block;
     private int num;
 
-    public ParkourCheckPoint(Parkour parkour, Block block, int num) {
+    public ParkourCheckpoint(Parkour parkour, Block block, int num) {
         this.parkour = parkour;
         this.block = block;
         this.num = num;
     }
 
-    public static ParkourCheckPoint getByBlock(Block block) {
-        if (!block.hasMetadata("parkour") || !block.hasMetadata("point")) return null;
+    public static ParkourCheckpoint getByBlock(Block block) {
+        if (!block.hasMetadata("parkour") || !block.hasMetadata("point")) {
+            return null;
+        }
 
         Parkour parkour = Parkour.findByName(block.getMetadata("parkour").get(0).asString());
 
-        if (parkour == null) return null;
+        if (parkour == null) {
+            return null;
+        }
 
-        return new ParkourCheckPoint(parkour, block, block.getMetadata("point").get(0).asInt());
+        return new ParkourCheckpoint(parkour, block, block.getMetadata("point").get(0).asInt());
+    }
+
+    public void remove() {
+        parkour.getCheckpoints().remove(num);
+
+        block.removeMetadata("parkour", ParkourPlugin.getInstance());
+        block.removeMetadata("point", ParkourPlugin.getInstance());
     }
 
     public void setLocation(Location location) {
@@ -35,7 +46,7 @@ public class ParkourCheckPoint {
     }
 
     private void setLocation(int x, int y, int z, World world) {
-        parkour.getLocationMap().put(num, new Location(world, x, y, z));
+        parkour.getCheckpoints().put(num, new Location(world, x, y, z));
 
         setBlockData("parkour", parkour.getDisplayName());
         setBlockData("point", num);
