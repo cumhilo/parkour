@@ -8,7 +8,6 @@ import me.yushust.message.util.Validate;
 import org.bukkit.command.CommandExecutor;
 
 import java.util.Objects;
-import java.util.logging.Logger;
 
 public class CommandService
         implements Service {
@@ -44,9 +43,9 @@ public class CommandService
 
     @Override
     public void start() {
-        // TODO: remove this, it is unnecessary, there are very few commands
         ParkourSetupCommand setupCommand = new ParkourSetupCommand(plugin);
 
+        // TODO: remove this, it is unnecessary, there are very few commands
         registerCommands(
                 "setup",
                 setupCommand,
@@ -55,10 +54,5 @@ public class CommandService
         );
 
         plugin.getCommand("setup").setTabCompleter(setupCommand);
-    }
-
-    @Override
-    public Logger getLogger() {
-        return plugin.getLogger();
     }
 }
