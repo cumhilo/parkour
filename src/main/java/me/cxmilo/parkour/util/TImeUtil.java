@@ -6,7 +6,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
-public class TImeUtil {
+public class TimeUtil {
 
     private static final ConfigurationSection SECTION = ParkourPlugin.getInstance().getConfig().getConfigurationSection("timeFormats");
 
