@@ -1,5 +1,29 @@
 parkour:
   create: "&eYou have created the parkour &a%name%&e identified with &a%uuid%."
+  start: "&eYou have started parkour &a%parkour%&e, good luck! complete it in the shortest possible time!"
+  setup:
+    error: "&a%name%&e is not a valid parkour!"
   checkpoint:
+    add: "&eCheckpoint number &a%num%&e has been added in parkour &a%parkour%&e!"
+    remove: "&eCheckpoint number &a%num%&e in parkour &a%parkour%&e has been removed!"
     teleport: "&eYou've fallen in parkour &a%parkour%&e, but you've been teleported to checkpoint number &a%checkpoint%&e again!"
     get: "&eYou have reached the checkpoint number &a%num%&e in the parkour of &a%parkour%&e with a time of: &a%time%&e!"
+  item:
+    add:
+      name: "&aCheckpoint adder"
+      lore:
+        - ""
+        - "Add a checkpoint to the position you right-click with this item"
+        - ""
+    remove:
+      name: "&aCheckpoint remover"
+      lore:
+        - ""
+        - "Removes a checkpoint at the position you right-click with this item"
+        - ""
+    exit:
+      name: "&aExit"
+      lore:
+        - ""
+        - "Exit setup mode"
+        - ""
