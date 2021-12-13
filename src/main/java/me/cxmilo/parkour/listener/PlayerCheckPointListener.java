@@ -1,7 +1,8 @@
 package me.cxmilo.parkour.listener;
 
 import me.cxmilo.parkour.ParkourPlugin;
-import me.cxmilo.parkour.game.ParkourCheckPoint;
+import me.cxmilo.parkour.game.CheckpointGameHandler;
+import me.cxmilo.parkour.game.ParkourCheckpoint;
 import me.cxmilo.parkour.game.ParkourGame;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
@@ -15,9 +16,11 @@ public class PlayerCheckPointListener
         implements Listener {
 
     private final ParkourPlugin plugin;
+    private final CheckpointGameHandler checkpointGameHandler;
 
     public PlayerCheckPointListener(ParkourPlugin plugin) {
         this.plugin = plugin;
+        this.checkpointGameHandler = new CheckpointGameHandler();
     }
 
     @EventHandler
@@ -37,7 +40,7 @@ public class PlayerCheckPointListener
             event.setCancelled(true);
 
             // teleport to last checkpoint and send a message to player
-            player.teleport(game.getParkour().getLocationMap().get(game.getLastCheckPoint()));
+            checkpointGameHandler.teleportToLastCheckpoint(player, game);
             plugin.getMessageHandler().sendReplacing(
                     player,
                     "parkour.checkpoint.teleport",
@@ -54,10 +57,15 @@ public class PlayerCheckPointListener
     @EventHandler
     public void onTouchCheckPoint(PlayerMoveEvent event) {
         Block blockTo = event.getTo().getBlock();
+        Block blockFrom = event.getFrom().getBlock();
 
-        ParkourCheckPoint checkPoint = ParkourCheckPoint.getByBlock(blockTo);
+        if (blockTo.getLocation().equals(blockFrom.getLocation())) {
+            return;
+        }
 
-        if (checkPoint == null) {
+        ParkourCheckpoint checkpoint = ParkourCheckpoint.getByBlock(blockTo);
+
+        if (checkpoint == null) {
             return;
         }
 
@@ -66,25 +74,28 @@ public class PlayerCheckPointListener
 
         if (game == null) {
             // if the player is not in a parkour and touches checkpoint 0 of a parkour the game will start
-            if (checkPoint.getNum() == 0) {
-                plugin.getParkourGames().put(player.getUniqueId(), new ParkourGame(checkPoint.getParkour()));
+            if (checkpoint.getNum() == 1) {
+                plugin.getParkourGameRegistry().getParkourGames().put(player.getUniqueId(), new ParkourGame(checkpoint.getParkour()));
+                plugin.getMessageHandler().sendReplacing(
+                        player,
+                        "parkour.start",
+                        "%parkour%",
+                        checkpoint.getParkour().getDisplayName()
+                );
             }
         } else {
-            // if the control point touched is less than or equal to the last control point it only returns
-            if (checkPoint.getNum() <= game.getLastCheckPoint()) {
-                return;
+            // update the last checkpoint and send a message to the player
+            if (checkpointGameHandler.updateLastGameCheckpoint(game, checkpoint)) {
+                plugin.getMessageHandler().sendReplacing(
+                        player,
+                        "parkour.checkpoint.get",
+                        "%num%",
+                        checkpoint.getNum(),
+                        "%parkour%",
+                        game.getParkour().getDisplayName(),
+                        "%time%",
+                        game.getDisplayTime());
             }
-
-            plugin.getMessageHandler().sendReplacing(
-                    player,
-                    "parkour.checkpoint.get",
-                    "%num%",
-                    checkPoint.getNum(),
-                    "%parkour%",
-                    game.getParkour().getDisplayName(),
-                    "%time%",
-                    game.getDisplayTime());
-            game.setLastCheckPoint(checkPoint.getNum());
         }
     }
 }
