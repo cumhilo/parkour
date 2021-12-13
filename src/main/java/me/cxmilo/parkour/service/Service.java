@@ -1,5 +1,7 @@
 package me.cxmilo.parkour.service;
 
+import me.cxmilo.parkour.ParkourPlugin;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,5 +15,7 @@ public interface Service {
         getLogger().log(Level.INFO, getClass().getSimpleName() + " has been stopped");
     }
 
-    Logger getLogger();
+    default Logger getLogger() {
+        return ParkourPlugin.getInstance().getLogger();
+    }
 }
