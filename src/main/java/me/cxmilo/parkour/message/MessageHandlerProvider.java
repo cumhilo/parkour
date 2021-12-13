@@ -21,14 +21,16 @@ public class MessageHandlerProvider {
         this.plugin = plugin;
     }
 
-    public MessageHandler get() {
-        MessageSource messageSource = MessageSourceDecorator
+    private MessageSource getMessageSource() {
+        return MessageSourceDecorator
                 .decorate(BukkitMessageAdapt.newYamlSource(plugin, "lang_%lang%.yml"))
                 .addFallbackLanguage(DEFAULT_LANGUAGE)
                 .get();
+    }
 
+    public MessageHandler get() {
         return MessageHandler.of(
-                MessageProvider.create(messageSource, configurationHandle -> {
+                MessageProvider.create(getMessageSource(), configurationHandle -> {
                     configurationHandle.specify(CommandSender.class)
                             .setLinguist(sender -> DEFAULT_LANGUAGE)
                             .setMessageSender((sender, s, message) -> sender.sendMessage(message));
