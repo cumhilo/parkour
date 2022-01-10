@@ -1,40 +1,29 @@
 package me.cxmilo.parkour;
 
-import org.bukkit.Location;
+import me.cxmilo.parkour.find.Findable;
+import me.cxmilo.parkour.util.AbbreviatedLocation;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Parkour {
+// TODO: this class will be replaced by the "Parkour" interface but not now
+public class Parkour
+        implements Findable<AbbreviatedLocation> {
 
-    private final UUID uuid;
-    private final Map<Integer, Location> checkpoints;
+    private final List<AbbreviatedLocation> checkpoints;
     private String displayName;
+    private int maxTime;
 
-    public Parkour(String displayName) {
+    /**
+     * Initialize a new Parkour object
+     *
+     * @param displayName the name to identify parkour
+     * @param maxTime     the maximum time in which the parkour must be completed, if it is 0 or less than 0 no maximum time will be set.
+     */
+    public Parkour(String displayName, int maxTime) {
         this.displayName = displayName;
-        this.uuid = UUID.randomUUID();
-        this.checkpoints = new HashMap<>();
-    }
-
-    public static Parkour findByName(String name) {
-        for (Parkour parkour : ParkourPlugin.getInstance().getParkourGameRegistry().getParkourSet()) {
-            if (parkour.getDisplayName().equalsIgnoreCase(name)) {
-                return parkour;
-            }
-        }
-
-
-        return null;
-    }
-
-    public Map<Integer, Location> getCheckpoints() {
-        return checkpoints;
-    }
-
-    public UUID getUuid() {
-        return uuid;
+        this.maxTime = maxTime;
+        this.checkpoints = new ArrayList<>();
     }
 
     public String getDisplayName() {
@@ -43,5 +32,22 @@ public class Parkour {
 
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
+    }
+
+    public int getMaxTime() {
+        return maxTime;
+    }
+
+    public void setMaxTime(int maxTime) {
+        this.maxTime = maxTime;
+    }
+
+    public List<AbbreviatedLocation> getCheckpoints() {
+        return checkpoints;
+    }
+
+    @Override
+    public AbbreviatedLocation getFindKey() {
+        return checkpoints.isEmpty() ? null : checkpoints.get(0);
     }
 }
