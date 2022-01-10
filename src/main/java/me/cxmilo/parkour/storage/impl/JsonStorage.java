@@ -26,7 +26,7 @@ public class JsonStorage<O>
         this.fileFolder = new File(plugin.getDataFolder().getAbsolutePath() + File.separator + clazz.getSimpleName());
 
         if (fileFolder.mkdir()) {
-            plugin.getLogger().log(Level.FINE, "Successfully fileFolder '" + fileFolder.getName() + "' created!");
+            plugin.getLogger().log(Level.FINE, "Successfully file '" + fileFolder.getName() + "' created!");
         }
     }
 
@@ -45,10 +45,10 @@ public class JsonStorage<O>
                 throw new IOException("Unable to save " + identifier + " json file");
             }
 
-            writer.write(GSON.toJson(object, object.getClass()));
+            writer.write(GSON.toJson(object, clazz));
             writer.flush();
         } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "Unable to save the fileFolder '" + fileFolder.getName() + "'", e);
+            plugin.getLogger().log(Level.SEVERE, "Unable to save the file '" + fileFolder.getName() + "'", e);
         }
     }
 
@@ -59,7 +59,7 @@ public class JsonStorage<O>
         try (Reader reader = new BufferedReader(new FileReader(file))) {
             return GSON.fromJson(reader, clazz);
         } catch (IOException e) {
-            plugin.getLogger().log(Level.SEVERE, "Unable to get the fileFolder '" + fileFolder.getName() + "'", e);
+            plugin.getLogger().log(Level.SEVERE, "Unable to get the file '" + fileFolder.getName() + "'", e);
         }
 
         return null;
@@ -69,7 +69,7 @@ public class JsonStorage<O>
     public Collection<O> values() {
         Set<O> values = new HashSet<>();
 
-        for (File file : Objects.requireNonNull(fileFolder.listFiles(), "File cannot be null")) {
+        for (File file : Objects.requireNonNull(fileFolder.listFiles(), "File must not be null")) {
             O value = get(file.getName());
             values.add(value);
         }
