@@ -9,17 +9,17 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent;
 import java.util.Map;
 import java.util.UUID;
 
-public class PlayerJoinListener
+public class PlayerPreLoginListener
         implements Listener {
 
     private final Map<UUID, User> users;
 
-    public PlayerJoinListener(ParkourPlugin plugin) {
+    public PlayerPreLoginListener(ParkourPlugin plugin) {
         this.users = plugin.getParkourGameRegistry().getUsers();
     }
 
-    @EventHandler
-    public void onPlayerJoin(AsyncPlayerPreLoginEvent event) {
+    @EventHandler(ignoreCancelled = true)
+    public void onAsyncPlayerPreLogin(AsyncPlayerPreLoginEvent event) {
         users.putIfAbsent(event.getUniqueId(), new User(event.getUniqueId()));
     }
 }
