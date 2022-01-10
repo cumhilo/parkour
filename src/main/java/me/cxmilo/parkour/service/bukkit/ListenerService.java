@@ -1,8 +1,8 @@
 package me.cxmilo.parkour.service.bukkit;
 
 import me.cxmilo.parkour.ParkourPlugin;
-import me.cxmilo.parkour.listener.PlayerJoinListener;
 import me.cxmilo.parkour.listener.PlayerParkourSetupListener;
+import me.cxmilo.parkour.listener.PlayerPreLoginListener;
 import me.cxmilo.parkour.listener.checkpoint.PlayerCheckpointListener;
 import me.cxmilo.parkour.listener.checkpoint.PlayerDamageListener;
 import me.cxmilo.parkour.service.Service;
@@ -30,7 +30,7 @@ public class ListenerService
     @Override
     public void start() {
         registerListeners(
-                new PlayerJoinListener(plugin),
+                new PlayerPreLoginListener(plugin),
                 new PlayerDamageListener(plugin),
                 new PlayerCheckpointListener(plugin),
                 new PlayerParkourSetupListener(plugin)
