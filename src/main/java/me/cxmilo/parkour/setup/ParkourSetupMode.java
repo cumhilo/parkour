@@ -9,7 +9,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.Plugin;
 
 public class ParkourSetupMode
-        implements SetupMode<Player> {
+        implements SetupMode {
 
     public static final String METADATA = "parkour-setup";
 
@@ -30,6 +30,7 @@ public class ParkourSetupMode
     @Override
     public void leave(Player player) {
         player.getInventory().clear();
+        player.updateInventory();
         player.removeMetadata(METADATA, plugin);
     }
 

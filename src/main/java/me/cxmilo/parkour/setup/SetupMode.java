@@ -1,14 +1,12 @@
 package me.cxmilo.parkour.setup;
 
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
 
-// I think this abstraction is unnecessary, I will probably change it
-// just in case I want to do something bigger in the future.
-public interface SetupMode<T extends Entity> {
+public interface SetupMode {
 
-    void enter(T entity);
+    void enter(Player player);
 
-    void leave(T entity);
+    void leave(Player player);
 
-    boolean hasSetupMode(T entity);
+    boolean hasSetupMode(Player player);
 }
