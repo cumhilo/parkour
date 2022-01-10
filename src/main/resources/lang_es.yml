@@ -1,0 +1,44 @@
+user:
+  lang: "&aSe ha actualizado sactisfactoriamente tu lenguaje a &e'%lang%'&a,&e 'lang'!"
+parkour:
+  create: "&eHas creado el parkour &a%parkour%&e identificado con &a%uuid%. %game%, game"
+  game:
+    start: "&eHas empezado el parkour &a%parkour%&e, buena suerte! completalo en el menor tiempo posible! %game%, game"
+    end: "&eHas terminado el parkour &a%parkour%&e en &a%time%&e! %game%, game"
+  setup:
+    error: "&e¡&a%parkour%&e no es un parkour vaido! %game%, game"
+  checkpoint:
+    add: "&eEl punto de control número &a%num%&e ha sido añadido en el parkour &a%parkour%&e!"
+    remove: "&eEl punto de control número &a%num%&e en el parkour &a%parkour%&e ha sido removido!"
+    teleport: "&eTe has caído en el parkour &a%parkour%&e, ¡pero has sido teletransportado al punto de control número &a%checkpoint%&e de nuevo!"
+    get: "&eHas alcanzado el punto de control número &a%num%&e en el parkour de &a%parkour%&e con un tiempo de: &a%time%&e!"
+  item:
+    add:
+      name: "&aCheckpoint adder"
+      lore:
+        - ""
+        - "Add a checkpoint to the position you right-click with this item"
+        - ""
+    remove:
+      name: "&aCheckpoint remover"
+      lore:
+        - ""
+        - "Removes a checkpoint at the position you right-click with this item"
+        - ""
+    exit:
+      name: "&aExit"
+      lore:
+        - ""
+        - "Exit setup mode"
+        - ""
+timeFormats:
+  second: "segundo"
+  seconds: "segundos"
+  minute: "minuto"
+  minutes: "minutos"
+  hour: "hora"
+  hours: "horas"
+  day: "día"
+  days: "días"
+  week: "semana"
+  weeks: "semanas"
