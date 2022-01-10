@@ -1,28 +1,29 @@
 package me.cxmilo.parkour;
 
-import me.cxmilo.parkour.game.ParkourGame;
+import me.cxmilo.parkour.user.User;
 
 import java.util.*;
 
 public class ParkourGameRegistry {
 
-    private Map<UUID, ParkourGame> parkourGames;
+    private Map<UUID, User> users;
     private Set<Parkour> parkourSet;
 
     public void updateParkour(Collection<Parkour> parkourCollection) {
-        parkourSet = new HashSet<>(parkourCollection);
+        this.parkourSet = new HashSet<>(parkourCollection);
     }
 
     public void initialize() {
-        this.parkourGames = new HashMap<>();
+        this.users = new HashMap<>();
         this.parkourSet = new HashSet<>();
     }
 
-    public Map<UUID, ParkourGame> getParkourGames() {
-        return parkourGames;
+    public Map<UUID, User> getUsers() {
+        return users;
     }
 
     public Set<Parkour> getParkourSet() {
         return parkourSet;
     }
+
 }
