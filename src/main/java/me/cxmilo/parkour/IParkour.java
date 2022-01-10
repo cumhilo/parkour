@@ -1,6 +1,6 @@
 package me.cxmilo.parkour;
 
-import me.cxmilo.parkour.util.AbbreviatedLocation;
+import me.cxmilo.parkour.location.AbbreviatedLocation;
 
 import java.util.List;
 

@@ -4,7 +4,7 @@ import me.cxmilo.parkour.Parkour;
 import me.cxmilo.parkour.ParkourGameRegistry;
 import me.cxmilo.parkour.ParkourPlugin;
 import me.cxmilo.parkour.find.Finder;
-import me.cxmilo.parkour.util.AbbreviatedLocation;
+import me.cxmilo.parkour.location.AbbreviatedLocation;
 import org.jetbrains.annotations.Nullable;
 
 public class ParkourFinder

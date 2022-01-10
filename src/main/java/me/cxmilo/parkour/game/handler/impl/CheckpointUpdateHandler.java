@@ -3,8 +3,8 @@ package me.cxmilo.parkour.game.handler.impl;
 import me.cxmilo.parkour.ParkourPlugin;
 import me.cxmilo.parkour.game.handler.Handler;
 import me.cxmilo.parkour.game.impl.ParkourGame;
+import me.cxmilo.parkour.location.AbbreviatedLocation;
 import me.cxmilo.parkour.user.User;
-import me.cxmilo.parkour.util.AbbreviatedLocation;
 import me.yushust.message.MessageHandler;
 
 import java.util.List;

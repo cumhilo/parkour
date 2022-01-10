@@ -9,8 +9,8 @@ import me.cxmilo.parkour.game.handler.Handler;
 import me.cxmilo.parkour.game.handler.impl.CheckpointUpdateHandler;
 import me.cxmilo.parkour.game.handler.impl.StartGameHandler;
 import me.cxmilo.parkour.game.impl.ParkourGame;
+import me.cxmilo.parkour.location.AbbreviatedLocation;
 import me.cxmilo.parkour.user.User;
-import me.cxmilo.parkour.util.AbbreviatedLocation;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -72,12 +72,12 @@ public class PlayerCheckpointListener
 
         // we also verify that the pressure plate on which the player is standing
         // is not from the player's active game, if this is the case it will return
-        if (!AbbreviatedLocation.containsLocation(gameCheckpoints, pressureLocation)) {
+        if (!gameCheckpoints.contains(pressureLocation)) {
             return;
         }
 
         // finally, we let the checkpoint update handler do the rest
-        Handler checkpointUpdateHandler = new CheckpointUpdateHandler(plugin, user, AbbreviatedLocation.indexOfLocation(gameCheckpoints, pressureLocation));
+        Handler checkpointUpdateHandler = new CheckpointUpdateHandler(plugin, user, gameCheckpoints.indexOf(pressureLocation));
         checkpointUpdateHandler.handle();
     }
 

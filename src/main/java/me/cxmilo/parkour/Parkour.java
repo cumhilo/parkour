@@ -1,7 +1,7 @@
 package me.cxmilo.parkour;
 
 import me.cxmilo.parkour.find.Findable;
-import me.cxmilo.parkour.util.AbbreviatedLocation;
+import me.cxmilo.parkour.location.AbbreviatedLocation;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,11 +4,11 @@ import me.cxmilo.parkour.Parkour;
 import me.cxmilo.parkour.ParkourPlugin;
 import me.cxmilo.parkour.find.Finder;
 import me.cxmilo.parkour.find.impl.UserFinder;
+import me.cxmilo.parkour.location.AbbreviatedLocation;
 import me.cxmilo.parkour.setup.ParkourSetupMode;
 import me.cxmilo.parkour.setup.SetupMode;
 import me.cxmilo.parkour.setup.inventory.SetupInventory;
 import me.cxmilo.parkour.user.User;
-import me.cxmilo.parkour.util.AbbreviatedLocation;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -60,7 +60,7 @@ public class PlayerParkourSetupListener
 
         switch (setupInventory) {
             case ADD: {
-                if (AbbreviatedLocation.containsLocation(parkour.getCheckpoints(), checkpoint)) {
+                if (parkour.getCheckpoints().contains(checkpoint)) {
                     player.sendMessage("Checkpoint already exists!");
                     return;
                 }
