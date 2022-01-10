@@ -1,8 +1,10 @@
 name: Parkour
 main: me.cxmilo.parkour.ParkourPlugin
-version: 1.0
+version: 2.0-SNAPSHOT
 author: vCamilx
 commands:
+  lang:
+    description: Change user lang
   parkour:
     description: Parkour command
   setup:
