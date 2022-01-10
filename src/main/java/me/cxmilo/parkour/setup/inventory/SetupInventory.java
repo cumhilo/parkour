@@ -27,7 +27,6 @@ public enum SetupInventory {
             .build());
 
     private static final Map<ItemStack, SetupInventory> SETUP_INVENTORY_MAP = new HashMap<>();
-    private final ItemStack itemStack;
 
     static {
         for (SetupInventory setupInventory : values()) {
@@ -35,15 +34,17 @@ public enum SetupInventory {
         }
     }
 
+    private final ItemStack itemStack;
+
     SetupInventory(ItemStack itemStack) {
         this.itemStack = itemStack;
     }
 
-    public ItemStack getItemStack() {
-        return itemStack;
-    }
-
     public static SetupInventory getSetupInventory(ItemStack itemStack) {
         return SETUP_INVENTORY_MAP.get(itemStack);
+    }
+
+    public ItemStack getItemStack() {
+        return itemStack;
     }
 }

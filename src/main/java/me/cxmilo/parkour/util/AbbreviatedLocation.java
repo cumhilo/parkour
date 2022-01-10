@@ -21,10 +21,6 @@ public class AbbreviatedLocation {
         this.z = z;
     }
 
-    public boolean isSimilar(@NotNull AbbreviatedLocation location) {
-        return x == location.getX() && y == location.getY() && z == location.getZ() && worldName.equals(location.getWorldName());
-    }
-
     public static int indexOfLocation(@NotNull List<AbbreviatedLocation> locations, AbbreviatedLocation location) {
         if (location == null) {
             for (int i = 0; i < locations.size(); i++)
@@ -45,6 +41,10 @@ public class AbbreviatedLocation {
 
     public static AbbreviatedLocation fromLocation(Location location) {
         return new AbbreviatedLocation(location.getWorld().getName(), location.getBlockX(), location.getBlockY(), location.getBlockZ());
+    }
+
+    public boolean isSimilar(@NotNull AbbreviatedLocation location) {
+        return x == location.getX() && y == location.getY() && z == location.getZ() && worldName.equals(location.getWorldName());
     }
 
     public Location toLocation() {

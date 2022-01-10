@@ -5,7 +5,10 @@ import me.cxmilo.parkour.storage.Storage;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class JsonStorage<O>
