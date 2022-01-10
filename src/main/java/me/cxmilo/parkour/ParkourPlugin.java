@@ -20,29 +20,51 @@ public class ParkourPlugin
     private Service listenerService;
     private MessageHandler messageHandler;
 
+    /**
+     * This method provides fast access to the plugin
+     *
+     * @return the plugin
+     */
     public static ParkourPlugin getInstance() {
         return JavaPlugin.getPlugin(ParkourPlugin.class);
     }
 
     @Override
     public void onEnable() {
+        // save default config
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
         this.parkourGameRegistry = new ParkourGameRegistry();
+        this.messageHandler = new MessageHandlerProvider(this).get();
+
+        // initialize all services
         this.parkourService = new ParkourService(this);
         this.commandService = new CommandService(this);
         this.listenerService = new ListenerService(this);
-        this.messageHandler = new MessageHandlerProvider(this).get();
 
         parkourGameRegistry.initialize();
-        parkourService.start();
-        commandService.start();
-        listenerService.start();
+        startServices();
     }
 
     @Override
     public void onDisable() {
+        stopServices();
+    }
+
+    /*
+     * Start all services
+     */
+    private void startServices() {
+        commandService.start();
+        listenerService.start();
+        parkourService.start();
+    }
+
+    /*
+     * Stop all services
+     */
+    private void stopServices() {
         parkourService.stop();
         commandService.stop();
         listenerService.stop();
