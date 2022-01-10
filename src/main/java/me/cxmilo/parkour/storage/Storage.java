@@ -1,6 +1,6 @@
 package me.cxmilo.parkour.storage;
 
-import java.io.File;
+import java.util.Collection;
 import java.util.Optional;
 
 public interface Storage<O> {
@@ -29,5 +29,5 @@ public interface Storage<O> {
         return def;
     }
 
-    File getFileFolder();
+    Collection<O> values();
 }

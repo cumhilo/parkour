@@ -1,11 +1,11 @@
 package me.cxmilo.parkour.storage.impl;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import me.cxmilo.parkour.storage.Storage;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
+import java.util.*;
 import java.util.logging.Level;
 
 public class JsonStorage<O>
@@ -32,9 +32,14 @@ public class JsonStorage<O>
         File file = new File(fileFolder, identifier + ".json");
 
         try (Writer writer = new BufferedWriter(new FileWriter(file))) {
+            boolean write = true;
 
-            if (file.createNewFile()) {
-                plugin.getLogger().log(Level.INFO, "Successfully file '" + file.getName() + "' created");
+            if (!file.exists()) {
+                write = file.createNewFile();
+            }
+
+            if (!write) {
+                throw new IOException("Unable to save " + identifier + " json file");
             }
 
             writer.write(GSON.toJson(object, object.getClass()));
@@ -46,7 +51,7 @@ public class JsonStorage<O>
 
     @Override
     public O get(String identifier) {
-        File file = new File(fileFolder, identifier + ".json");
+        File file = new File(fileFolder, identifier.endsWith(".json") ? identifier : identifier + ".json");
 
         try (Reader reader = new BufferedReader(new FileReader(file))) {
             return GSON.fromJson(reader, clazz);
@@ -57,7 +62,15 @@ public class JsonStorage<O>
         return null;
     }
 
-    public File getFileFolder() {
-        return fileFolder;
+    @Override
+    public Collection<O> values() {
+        Set<O> values = new HashSet<>();
+
+        for (File file : Objects.requireNonNull(fileFolder.listFiles(), "File cannot be null")) {
+            O value = get(file.getName());
+            values.add(value);
+        }
+
+        return values;
     }
 }
