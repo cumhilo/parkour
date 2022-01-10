@@ -14,7 +14,7 @@ import java.util.UUID;
 public class User
         implements Findable<Player> {
 
-    private final Player player;
+    private final UUID id;
     private Lang lang;
     private ParkourGame activeGame;
     private List<CompletedGame> completedGames;
@@ -25,14 +25,14 @@ public class User
      * @param id player's unique id
      */
     public User(UUID id) {
-        this.player = Bukkit.getPlayer(id);
+        this.id = id;
         this.lang = Lang.ES;
         this.activeGame = null;
         this.completedGames = new ArrayList<>();
     }
 
     public Player getPlayer() {
-        return player;
+        return Bukkit.getPlayer(id);
     }
 
     public Lang getLang() {
@@ -61,6 +61,6 @@ public class User
 
     @Override
     public Player getFindKey() {
-        return player;
+        return Bukkit.getPlayer(id);
     }
 }
