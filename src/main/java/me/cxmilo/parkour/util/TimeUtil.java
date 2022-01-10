@@ -1,16 +1,16 @@
 package me.cxmilo.parkour.util;
 
 import me.cxmilo.parkour.ParkourPlugin;
-import org.bukkit.configuration.ConfigurationSection;
+import me.yushust.message.MessageHandler;
 
 import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
 
 public class TimeUtil {
 
-    private static final ConfigurationSection SECTION = ParkourPlugin.getInstance().getConfig().getConfigurationSection("timeFormats");
+    private static final MessageHandler MESSAGE_HANDLER = ParkourPlugin.getInstance().getMessageHandler();
 
-    // Credits to Gilberto García @FixedDev on github
+    // Credits to Gilberto García @FixedDev on GitHub
     public static String durationToHumanTime(long time) {
         StringJoiner joiner = new StringJoiner(" ");
 
@@ -23,9 +23,9 @@ public class TimeUtil {
             String unit;
 
             if (unitValue == 1) {
-                unit = SECTION.getString("week");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.week");
             } else {
-                unit = SECTION.getString("weeks");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.weeks");
             }
 
             joiner.add(unitValue + " " + unit);
@@ -38,9 +38,9 @@ public class TimeUtil {
             String unit;
 
             if (unitValue == 1) {
-                unit = SECTION.getString("day");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.day");
             } else {
-                unit = SECTION.getString("days");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.days");
             }
 
             joiner.add(unitValue + " " + unit);
@@ -52,9 +52,9 @@ public class TimeUtil {
             String unit;
 
             if (unitValue == 1) {
-                unit = SECTION.getString("hour");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.hour");
             } else {
-                unit = SECTION.getString("hours");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.hours");
             }
 
             joiner.add(unitValue + " " + unit);
@@ -66,9 +66,9 @@ public class TimeUtil {
             String unit;
 
             if (unitValue == 1) {
-                unit = SECTION.getString("minute");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.minute");
             } else {
-                unit = SECTION.getString("minutes");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.minutes");
             }
 
             joiner.add(unitValue + " " + unit);
@@ -78,9 +78,9 @@ public class TimeUtil {
             String unit;
 
             if (seconds == 1) {
-                unit = SECTION.getString("second");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.second");
             } else {
-                unit = SECTION.getString("seconds");
+                unit = MESSAGE_HANDLER.getMessage("timeFormats.seconds");
             }
 
             joiner.add(seconds + " " + unit);
