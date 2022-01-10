@@ -1,8 +1,12 @@
+user:
+  lang: "&aYou successfully update your lang to &e'%lang%'&a,&e 'lang'!"
 parkour:
-  create: "&eYou have created the parkour &a%name%&e identified with &a%uuid%."
-  start: "&eYou have started parkour &a%parkour%&e, good luck! complete it in the shortest possible time!"
+  create: "&eYou have created the parkour &a%parkour%&e identified with &a%uuid%."
+  game:
+    start: "&eYou have started parkour &a%parkour%&e, good luck! complete it in the shortest possible time!"
+    end: "&eHave you finished parkour &a%parkour%&e in &a%time%&e!"
   setup:
-    error: "&a%name%&e is not a valid parkour!"
+    error: "&a%parkour%&e is not a valid parkour!"
   checkpoint:
     add: "&eCheckpoint number &a%num%&e has been added in parkour &a%parkour%&e!"
     remove: "&eCheckpoint number &a%num%&e in parkour &a%parkour%&e has been removed!"
@@ -27,3 +31,14 @@ parkour:
         - ""
         - "Exit setup mode"
         - ""
+timeFormats:
+  second: "second"
+  seconds: "seconds"
+  minute: "minute"
+  minutes: "minutes"
+  hour: "hour"
+  hours: "hours"
+  day: "day"
+  days: "days"
+  week: "week"
+  weeks: "weeks"
