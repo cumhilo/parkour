@@ -3,6 +3,7 @@ package me.cxmilo.parkour.service.bukkit;
 import me.cxmilo.parkour.ParkourPlugin;
 import me.cxmilo.parkour.command.ParkourCreateCommand;
 import me.cxmilo.parkour.command.ParkourSetupCommand;
+import me.cxmilo.parkour.command.user.LangCommand;
 import me.cxmilo.parkour.service.Service;
 import me.yushust.message.util.Validate;
 import org.bukkit.command.CommandExecutor;
@@ -47,6 +48,8 @@ public class CommandService
 
         // TODO: remove this, it is unnecessary, there are very few commands
         registerCommands(
+                "lang",
+                new LangCommand(plugin),
                 "setup",
                 setupCommand,
                 "parkour",
