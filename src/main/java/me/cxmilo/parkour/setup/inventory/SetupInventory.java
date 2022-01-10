@@ -8,6 +8,7 @@ import team.unnamed.gui.core.item.type.ItemBuilder;
 import java.util.HashMap;
 import java.util.Map;
 
+// FIXME: remove this class, it looks a bit ugly and I think it can be improved
 public enum SetupInventory {
     ADD(ItemBuilder
             .newDyeItemBuilder(Material.INK_SACK.name(), DyeColor.GREEN)
