@@ -1,12 +1,12 @@
 user:
-  lang: "&aSe ha actualizado sactisfactoriamente tu lenguaje a &e'%lang%'&a,&e 'lang'!"
+  lang: "&aSe ha actualizado sactisfactoriamente tu lenguaje a &e'%lang%'&a!"
 parkour:
-  create: "&eHas creado el parkour &a%parkour%&e identificado con &a%uuid%. %game%, game"
+  create: "&eHas creado el parkour &a%parkour%&e identificado con &a%uuid%."
   game:
-    start: "&eHas empezado el parkour &a%parkour%&e, buena suerte! completalo en el menor tiempo posible! %game%, game"
-    end: "&eHas terminado el parkour &a%parkour%&e en &a%time%&e! %game%, game"
+    start: "&eHas empezado el parkour &a%parkour%&e, buena suerte! completalo en el menor tiempo posible!"
+    end: "&eHas terminado el parkour &a%parkour%&e en &a%time%&e!"
   setup:
-    error: "&e¡&a%parkour%&e no es un parkour vaido! %game%, game"
+    error: "&e¡&a%parkour%&e no es un parkour valido!"
   checkpoint:
     add: "&eEl punto de control número &a%num%&e ha sido añadido en el parkour &a%parkour%&e!"
     remove: "&eEl punto de control número &a%num%&e en el parkour &a%parkour%&e ha sido removido!"

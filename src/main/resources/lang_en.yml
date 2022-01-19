@@ -1,5 +1,5 @@
 user:
-  lang: "&aYou successfully update your lang to &e'%lang%'&a,&e 'lang'!"
+  lang: "&aYou successfully update your lang to &e'%lang%'&a!"
 parkour:
   create: "&eYou have created the parkour &a%parkour%&e identified with &a%uuid%."
   game:
