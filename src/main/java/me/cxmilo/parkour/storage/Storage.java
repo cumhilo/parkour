@@ -5,9 +5,14 @@ import java.util.Optional;
 
 public interface Storage<O> {
 
+    /**
+     *
+     * @param identifier
+     * @param object
+     */
     void save(String identifier, O object);
 
-    default void saveIfNoExits(String identifier, O object) {
+    default void saveIfNoExists(String identifier, O object) {
         if (get(identifier) != null) {
             return;
         }
