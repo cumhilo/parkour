@@ -55,7 +55,7 @@ public class PlayerCheckpointListener
         if (parkour != null) {
             // initialize a 'Start game handler' if pressure checkpoint is similar to the '0' checkpoint
             AbbreviatedLocation firstCheckpoint = parkour.getCheckpoints().get(0);
-            if (firstCheckpoint != null && firstCheckpoint.isSimilar(pressureLocation)) {
+            if (!parkour.getCheckpoints().isEmpty() && firstCheckpoint.isSimilar(pressureLocation)) {
                 new StartGameHandler(user, parkour).handle();
             }
         }
