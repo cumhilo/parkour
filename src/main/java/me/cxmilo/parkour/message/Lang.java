@@ -1,5 +1,7 @@
 package me.cxmilo.parkour.message;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +12,7 @@ public enum Lang {
     private static final Map<String, Lang> FIND_MAP = new HashMap<>();
 
     static {
-        for (Lang lang : Lang.values()) {
+        for (Lang lang : values()) {
             FIND_MAP.put(lang.abbreviation, lang);
         }
     }
@@ -23,7 +25,7 @@ public enum Lang {
         this.abbreviation = abbreviation;
     }
 
-    public static Lang find(String abbreviation) {
+    public static @Nullable Lang find(String abbreviation) {
         return FIND_MAP.get(abbreviation);
     }
 
